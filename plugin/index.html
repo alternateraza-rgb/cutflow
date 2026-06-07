@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cutflow Resolve Assistant</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div>
+          <p class="eyebrow">Cutflow v1</p>
+          <h1>Resolve AI Assistant</h1>
+        </div>
+        <div id="status" class="status status--offline">Bridge offline</div>
+      </header>
+
+      <section class="quick-actions" aria-label="Example prompts">
+        <button data-prompt='Put caption "New chapter" here for 4 seconds'>
+          Caption here
+        </button>
+        <button data-prompt="Add a smooth 20% zoom in to this clip">
+          Zoom current clip
+        </button>
+        <button data-prompt="Analyze audio and find b-roll of a busy city at night">
+          Plan b-roll
+        </button>
+      </section>
+
+      <section id="messages" class="messages" aria-live="polite">
+        <article class="message message--assistant">
+          <strong>Cutflow</strong>
+          <p>
+            Tell me an edit to make in Resolve. V1 supports captions, zooms,
+            timeline context, and b-roll planning.
+          </p>
+        </article>
+      </section>
+
+      <form id="chat-form" class="composer">
+        <textarea
+          id="prompt"
+          name="prompt"
+          rows="3"
+          placeholder='Try: "Add a smooth 20% zoom in to this clip"'
+          required
+        ></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>

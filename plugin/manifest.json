@@ -1,0 +1,14 @@
+{
+  "name": "Cutflow Resolve Assistant",
+  "version": "0.1.0",
+  "description": "Chat interface for controlling basic DaVinci Resolve editing actions through the local Cutflow bridge.",
+  "entry": "index.html",
+  "bridgeUrl": "http://127.0.0.1:8765",
+  "capabilities": [
+    "chat",
+    "captions",
+    "clip-zoom",
+    "stock-broll-planning",
+    "timeline-context"
+  ]
+}
