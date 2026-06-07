@@ -51,7 +51,7 @@ def parse_prompt(prompt: str) -> dict[str, Any]:
             f"Apply a smooth zoom to the current clip ending at {amount:.2f}x.",
         )
 
-    if _mentions_any(lower, ("b-roll", "broll", "stock", "image", "images", "footage", "visuals")):
+    if _mentions_any(lower, ("b-roll", "b roll", "broll", "stock", "image", "images", "footage", "visuals")):
         query = _extract_visual_query(clean_prompt)
         media_type = "image" if _mentions_any(lower, ("image", "images", "photo", "photos")) else "video"
         return _command(
@@ -152,6 +152,15 @@ def _extract_visual_query(text: str) -> str:
         if index != -1:
             query = text[index + len(marker) :].strip(" .")
             if query:
-                return query
+                return _clean_visual_query(query)
 
-    return DEFAULT_BROLL_QUERY
+    query = _clean_visual_query(text)
+    return query or DEFAULT_BROLL_QUERY
+
+
+def _clean_visual_query(text: str) -> str:
+    query = text.lower().strip(" .")
+    query = re.sub(r"^(find|get|search|pull|add|insert|use)\s+", "", query)
+    query = re.sub(r"\b(b[- ]?roll|stock|footage|video|videos|image|images|visuals)\b", "", query)
+    query = re.sub(r"\s+", " ", query).strip(" .")
+    return query
