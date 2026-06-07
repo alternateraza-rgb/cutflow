@@ -50,7 +50,7 @@ resolve_scripts/
 Start the bridge in dry-run mode:
 
 ```bash
-python bridge/server.py --dry-run
+python3 bridge/server.py --dry-run
 ```
 
 Open the panel:
@@ -73,6 +73,49 @@ Add a smooth 20% zoom in to this clip
 
 The UI will show the parsed command and dry-run result.
 
+## Build and run as a macOS app
+
+The simplest v1 macOS app is a generated `.app` wrapper. It bundles the chat UI
+and Python bridge, starts both local services, then opens the assistant panel in
+your browser.
+
+On a Mac, build the app:
+
+```bash
+python3 macos/build_app.py
+```
+
+Then open it:
+
+```bash
+open dist/Cutflow.app
+```
+
+Or double-click:
+
+```text
+dist/Cutflow.app
+```
+
+What happens when the app opens:
+
+1. Starts the local bridge on `http://127.0.0.1:8765`
+2. Serves the chat panel on `http://127.0.0.1:9000`
+3. Opens the panel in your default browser
+4. Writes logs to `~/Library/Logs/Cutflow`
+
+If DaVinci Resolve is open and scripting is available, the bridge will try to
+connect to the active project/timeline. For development without Resolve, launch
+the app in dry-run mode from Terminal:
+
+```bash
+CUTFLOW_DRY_RUN=1 open dist/Cutflow.app
+```
+
+If macOS blocks the unsigned prototype app, right-click `Cutflow.app`, choose
+Open, then confirm. A production app should be signed and notarized with an
+Apple Developer account.
+
 ## Run it with DaVinci Resolve
 
 1. Install DaVinci Resolve Studio or Resolve.
@@ -81,7 +124,7 @@ The UI will show the parsed command and dry-run result.
 4. Start the bridge:
 
    ```bash
-   python bridge/server.py
+   python3 bridge/server.py
    ```
 
 5. Check the connection:
@@ -103,7 +146,7 @@ Set a Pexels API key to get licensed stock suggestions:
 
 ```bash
 export PEXELS_API_KEY="your-api-key"
-python bridge/server.py
+python3 bridge/server.py
 ```
 
 Without the key, v1 returns a placeholder suggestion so the rest of the flow can

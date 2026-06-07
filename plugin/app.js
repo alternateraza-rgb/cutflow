@@ -41,7 +41,7 @@ async function sendPrompt(prompt) {
     addMessage(
       "assistant",
       "Cutflow",
-      "I could not reach the local bridge. Start it with: python bridge/server.py --dry-run",
+      "I could not reach the local bridge. Start it with: python3 bridge/server.py --dry-run",
       { error: String(error) },
     );
   }
